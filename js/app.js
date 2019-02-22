@@ -14,9 +14,9 @@ var numberOfQuestion = 0;
 var correctAnswers = 0;
 
 //greet the user and check if interested in playing the game.
-if (firstName && lastName) {
-    alert('Greetings ' + firstName + ' ' + lastName + '!!! ' + 'Welcome to my small guessing game!!!!');
-
+if (firstName || lastName) {
+    //Validating user first name and last name
+    nameValidation(firstName, lastName);
     //Check if user wants to play the game
     var guessingGameFlag = prompt("Ready to play a guesssing game about me?");
 
@@ -24,26 +24,15 @@ if (firstName && lastName) {
     if (guessingGameFlag.toUpperCase() === 'Y' || guessingGameFlag.toUpperCase() === 'YES') {
         alert("Lets Rock and Roll!!!!!");
 
-        //1st question
-        var homeCountry = prompt('Is my home country India?');
-        numberOfQuestion++;
-        console.log('Home Country:', homeCountry);
+        // 1st Function
+        var questionOneTwo = functionQuestionOneTwo();
+        var numberOfQuestionOneTwo = questionOneTwo[0];
+        var correctAnswersOneTwo = questionOneTwo[1];
 
-        if (homeCountry.toUpperCase() === 'Y' || homeCountry.toUpperCase() === 'YES') {
-            //Increment correct answer counter 
-            correctAnswers++;
-            alert("Correct Answer!!!");
+        //increment the counter 
+        numberOfQuestion = numberOfQuestion + numberOfQuestionOneTwo;
+        correctAnswers = correctAnswers + correctAnswersOneTwo;
 
-            //2nd Question
-            var homeCountryCity = prompt("Guess my home city - Kolkata, Delhi, Mumbai, Goa ?");
-            numberOfQuestion++;
-            console.log('Home City:', homeCountryCity);
-
-            if (homeCountryCity.toUpperCase() === "KOLKATA") {
-                correctAnswers++;
-                alert("Correct Answer!!!");
-            }
-        }
 
         //3rd Question
         var favoritePastTime = prompt('Is playing video games my favorite past time?');
@@ -129,4 +118,54 @@ if (firstName && lastName) {
     } else {
         alert("Thanks and appreciate your time searching for this guessing game!!!");
     }
+} else{
+    alert("Thanks for visiting my home page, Enjoy the day");
+}
+
+/* First Name and Last Name Validations for alerting welcome */
+
+function nameValidation(firstName, lastName){
+    firstName= firstName.toUpperCase()
+    lastName = lastName.toUpperCase()
+    
+   if((!!firstName) && (!!lastName)){
+        alert('Greetings ' + firstName + ' ' + lastName + '!!! ' + 'Welcome to my small guessing game!!!!');
+    } else {
+        if (!!lastName){
+            alert('Greetings ' + lastName + '!!! ' + 'Welcome to my small guessing game!!!!');
+        }
+        if (!!firstName)
+        {
+            alert('Greetings ' + firstName + ' ' + '!!! ' + 'Welcome to my small guessing game!!!!');
+        }
+    }
+}
+
+// Function for Question one and two
+// Returns the number of questions and correct answers as array
+function functionQuestionOneTwo() {
+    var numberOfQuestion = 0;
+    var correctAnswers = 0;
+
+    //1st question
+    var homeCountry = prompt('Is my home country India?');
+    numberOfQuestion++;
+    console.log('Home Country:', homeCountry);
+
+    if (homeCountry.toUpperCase() === 'Y' || homeCountry.toUpperCase() === 'YES') {
+        //Increment correct answer counter 
+        correctAnswers++;
+        alert("Correct Answer!!!");
+
+        //2nd Question
+        var homeCountryCity = prompt("Guess my home city - Kolkata, Delhi, Mumbai, Goa ?");
+        numberOfQuestion++;
+        console.log('Home City:', homeCountryCity);
+
+        if (homeCountryCity.toUpperCase() === "KOLKATA") {
+            correctAnswers++;
+            alert("Correct Answer!!!");
+        }
+    }
+    return [numberOfQuestion, correctAnswers];
 }
